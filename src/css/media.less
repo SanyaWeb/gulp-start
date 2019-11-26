@@ -1,0 +1,20 @@
+.screenMin(@rules) {
+  @media screen and (min-width: 450px) {
+    @rules();
+  }
+}
+.screenSmall(@rules) {
+  @media screen and (min-width: 650px) {
+    @rules();
+  }
+}
+.screenBig(@rules) {
+  @media screen and (min-width: 900px) {
+    @rules();
+  }
+}
+.screenMax(@rules) {
+  @media screen and (min-width: 1200px) {
+    @rules();
+  }
+}
