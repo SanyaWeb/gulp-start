@@ -1,5 +1,22 @@
-@import "../blocks/header/header.css";
-body {
+@import "fonts";
+
+html {
   margin: 0;
   padding: 0;
 }
+.page {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+  font-family: @fontRegular;
+}
+.main {
+  color: #fff;
+}
+@import "../blocks/header/header";
+
+

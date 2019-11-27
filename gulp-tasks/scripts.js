@@ -1,20 +1,35 @@
+import webpack from "webpack";
+import webpackStream from "webpack-stream";
 import gulp from "gulp";
-import concat from "gulp-concat";
-import uglify from "gulp-uglify";
 import browsersync from "browser-sync";
 
-const jsFiles = [
-    "./src/js/*.js"
-];
+const webpackConfig = require("../webpack.config.js");
 
-function scripts() {
-    return gulp.src("./src/js/*.js")
-        .pipe(concat("scripts.js"))
-        .pipe(uglify({
-            toplevel: true
-        }))
-        .pipe(gulp.dest('./build/js'))
-        .pipe(browsersync.stream());
-}
+const path = require("path");
+const fs = require('fs');
 
-gulp.task("scripts", scripts);
+const jsFolder = path.resolve(__dirname, "../src/js/");
+
+const jsFiles = fs.readdirSync(jsFolder);
+
+const entry = [];
+
+const isFile = fileName => {
+    return fs.lstatSync(fileName).isFile()
+};
+
+jsFiles.forEach((item) => {
+    if(isFile(path.join(jsFolder, item))) {
+        entry.push(jsFolder + "/" + item);
+    }
+});
+
+webpackConfig.mode = "production";
+webpackConfig.devtool = false;
+
+gulp.task("scripts", () => {
+    return gulp.src(entry)
+        .pipe(webpackStream(webpackConfig), webpack)
+        .pipe(gulp.dest("./build/js"))
+        .on("end", browsersync.reload);
+});

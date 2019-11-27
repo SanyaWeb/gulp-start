@@ -5,10 +5,9 @@ import cleanCSS from "gulp-clean-css";
 import browsersync from "browser-sync";
 
 function commonStyles() {
-    return gulp.src("./src/css/*.css")
-        .pipe(concat('styles.css'))
+    return gulp.src("./src/css/general.css")
         .pipe(autoprefixer())
-        .pipe(cleanCSS({level: 2}))
+        //.pipe(cleanCSS({level: 2}))
         .pipe(gulp.dest('./build/css'))
         .pipe(browsersync.stream());
 }
@@ -16,7 +15,7 @@ function commonStyles() {
 function pageStyles() {
     return gulp.src("./src/css/page/*.css")
         .pipe(autoprefixer())
-        .pipe(cleanCSS({level: 2}))
+        //.pipe(cleanCSS({level: 2}))
         .pipe(gulp.dest('./build/css/page'))
         .pipe(browsersync.stream());
 }

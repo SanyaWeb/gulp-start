@@ -34,6 +34,8 @@ export const spritesPNG = gulp.task("spritesPNG");
 export const fonts = gulp.task("fonts");
 export const favicons = gulp.task("favicons");
 
+gulp.task("cleanAll", gulp.parallel(cleanCss, cleanJs, cleanHtml, cleanImages, cleanFonts, cleanFavicons));
+
 gulp.task("serve", serve);
 gulp.task("build", gulp.series(
     gulp.parallel(cleanCss, cleanJs, cleanHtml, cleanImages, cleanFonts, cleanFavicons),
